@@ -131,3 +131,7 @@ a:hover { text-decoration: underline; }
   .nav-links { gap: 14px; }
   .nav-links a:not(.keep) { display: none; }
 }
+
+/* Image logos (replacing the text mark) */
+img.logo { object-fit: cover; display: block; }
+img.logo-lg { object-fit: cover; display: block; }
