@@ -28,7 +28,7 @@
 
     <section class="preview-grid">
       <figure class="preview-card">
-        <img src="images/1.png" alt="LumieGo dual-camera recording screen" loading="lazy" />
+        <span class="shot"><img src="images/1.png" alt="LumieGo dual-camera recording screen" loading="lazy" /></span>
         <figcaption>
           <span class="preview-tag">Dual Camera</span>
           <h3>Two cameras. One take.</h3>
@@ -37,7 +37,7 @@
       </figure>
 
       <figure class="preview-card">
-        <img src="images/2.png" alt="LumieGo two-person crew framing" loading="lazy" />
+        <span class="shot"><img src="images/2.png" alt="LumieGo two-person crew framing" loading="lazy" /></span>
         <figcaption>
           <span class="preview-tag">Solo, Not Alone</span>
           <h3>Shoot like a two-person crew.</h3>
@@ -46,7 +46,7 @@
       </figure>
 
       <figure class="preview-card">
-        <img src="images/3.png" alt="LumieGo teleprompter overlay" loading="lazy" />
+        <span class="shot"><img src="images/3.png" alt="LumieGo teleprompter overlay" loading="lazy" /></span>
         <figcaption>
           <span class="preview-tag">Built-In Teleprompter</span>
           <h3>Read while you record.</h3>
@@ -55,7 +55,7 @@
       </figure>
 
       <figure class="preview-card">
-        <img src="images/4.png" alt="LumieGo social media safe-zone layouts" loading="lazy" />
+        <span class="shot"><img src="images/4.png" alt="LumieGo social media safe-zone layouts" loading="lazy" /></span>
         <figcaption>
           <span class="preview-tag">Safe-Zone Guides</span>
           <h3>Framed for every feed.</h3>
@@ -64,7 +64,7 @@
       </figure>
 
       <figure class="preview-card">
-        <img src="images/5.png" alt="LumieGo pro quality features" loading="lazy" />
+        <span class="shot"><img src="images/5.png" alt="LumieGo pro quality features" loading="lazy" /></span>
         <figcaption>
           <span class="preview-tag">Pro Quality</span>
           <h3>4K. No watermark. No limits.</h3>
@@ -73,7 +73,7 @@
       </figure>
 
       <figure class="preview-card">
-        <img src="images/6.png" alt="LumieGo onboarding screen" loading="lazy" />
+        <span class="shot"><img src="images/6.png" alt="LumieGo onboarding screen" loading="lazy" /></span>
         <figcaption>
           <span class="preview-tag">Onboarding</span>
           <h3>Designed to get you shooting.</h3>
@@ -82,7 +82,7 @@
       </figure>
 
       <figure class="preview-card">
-        <img src="images/7.png" alt="LumieGo welcome and sign-in screen" loading="lazy" />
+        <span class="shot"><img src="images/7.png" alt="LumieGo welcome and sign-in screen" loading="lazy" /></span>
         <figcaption>
           <span class="preview-tag">Sign in with Apple</span>
           <h3>Private by default.</h3>
@@ -113,5 +113,26 @@
       <div class="powered">Powered by Novamint Labs</div>
     </div>
   </footer>
+
+  <script>
+    // Reveal preview cards as they enter the viewport - alternating left/right.
+    (function () {
+      var cards = document.querySelectorAll('.preview-card');
+      if (!('IntersectionObserver' in window)) {
+        // Fallback: just show everything immediately on older browsers.
+        cards.forEach(function (c) { c.classList.add('is-visible'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);   // animate once, then stop watching
+          }
+        });
+      }, { threshold: 0.18, rootMargin: '0px 0px -40px 0px' });
+      cards.forEach(function (c) { io.observe(c); });
+    })();
+  </script>
 </body>
 </html>
